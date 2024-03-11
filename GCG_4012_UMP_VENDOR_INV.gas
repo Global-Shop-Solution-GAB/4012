@@ -1,0 +1,317 @@
+Program.Sub.ScreenSU.Start
+gui.Form1..create
+gui.Form1..caption("Selection Criteria")
+gui.Form1..size(4560,2355)
+gui.Form1..minx(0)
+gui.Form1..miny(0)
+gui.Form1..position(0,0)
+gui.Form1..event(unload,form1_unload)
+gui.Form1..alwaysontop(False)
+gui.Form1..fontname("Arial")
+gui.Form1..fontsize(8)
+gui.Form1..forecolor(0)
+gui.Form1..fontstyle(,,,,)
+gui.Form1..BackColor(-2147483633)
+gui.Form1..controlbox(True)
+gui.Form1..maxbutton(True)
+gui.Form1..minbutton(True)
+gui.Form1..mousepointer(0)
+gui.Form1..moveable(True)
+gui.Form1..sizeable(False)
+gui.Form1..ShowInTaskBar(True)
+gui.Form1..titlebar(True)
+gui.Form1.txtVendBrws.create(textbox,"",True,2385,300,0,1450,800,False,0,Arial,8,-2147483643,1)
+gui.Form1.txtVendBrws.defaultvalue("")
+gui.Form1.txtVendBrws.controlgroup(0)
+gui.Form1.lbl1.create(label,"Vendor Name:",True,1935,255,1,1500,600,True,0,Arial,8,-2147483633,0)
+gui.Form1.lbl1.defaultvalue("")
+gui.Form1.lbl1.controlgroup(0)
+gui.Form1.cmdVendBrws.create(button)
+gui.Form1.cmdVendBrws.caption("^")
+gui.Form1.cmdVendBrws.visible(True)
+gui.Form1.cmdVendBrws.size(435,375)
+gui.Form1.cmdVendBrws.zorder(0)
+gui.Form1.cmdVendBrws.position(3840,800)
+gui.Form1.cmdVendBrws.enabled(True)
+gui.Form1.cmdVendBrws.fontname("Arial")
+gui.Form1.cmdVendBrws.fontsize(8)
+gui.Form1.cmdVendBrws.event(click,cmdvendbrws_click)
+gui.Form1.cmdVendBrws.defaultvalue("")
+gui.Form1.cmdVendBrws.controlgroup(0)
+gui.Form1.datepickerBegin.create(datepicker)
+gui.Form1.datepickerBegin.visible(True)
+gui.Form1.datepickerBegin.size(1935,285)
+gui.Form1.datepickerBegin.zorder(0)
+gui.Form1.datepickerBegin.position(200,300)
+gui.Form1.datepickerBegin.enabled(True)
+gui.Form1.datepickerBegin.checkbox(False)
+gui.Form1.datepickerBegin.defaultvalue("")
+gui.Form1.datepickerBegin.controlgroup(0)
+gui.Form1.lbl2.create(label,"Beginning Date:",True,1935,255,1,200,110,True,0,Arial,8,-2147483633,0)
+gui.Form1.lbl2.defaultvalue("")
+gui.Form1.lbl2.controlgroup(0)
+gui.Form1.datepickerEnd.create(datepicker)
+gui.Form1.datepickerEnd.visible(True)
+gui.Form1.datepickerEnd.size(1935,285)
+gui.Form1.datepickerEnd.zorder(0)
+gui.Form1.datepickerEnd.position(2200,300)
+gui.Form1.datepickerEnd.enabled(True)
+gui.Form1.datepickerEnd.checkbox(False)
+gui.Form1.datepickerEnd.defaultvalue("")
+gui.Form1.datepickerEnd.controlgroup(0)
+gui.Form1.lbl3.create(label,"Ending Date:",True,1935,255,1,2200,100,True,0,Arial,8,-2147483633,0)
+gui.Form1.lbl3.defaultvalue("")
+gui.Form1.lbl3.controlgroup(0)
+gui.Form1.cmdPrint.create(button)
+gui.Form1.cmdPrint.caption("Ok")
+gui.Form1.cmdPrint.visible(True)
+gui.Form1.cmdPrint.size(855,375)
+gui.Form1.cmdPrint.zorder(0)
+gui.Form1.cmdPrint.position(200,1200)
+gui.Form1.cmdPrint.enabled(True)
+gui.Form1.cmdPrint.fontname("Arial")
+gui.Form1.cmdPrint.fontsize(8)
+gui.Form1.cmdPrint.event(click,cmdprint_click)
+gui.Form1.cmdPrint.defaultvalue("")
+gui.Form1.cmdPrint.controlgroup(0)
+gui.Form1.txtVendBrws1.create(textbox,"",True,1215,300,0,200,800,True,0,Arial,8,-2147483643,1)
+gui.Form1.txtVendBrws1.event(lostfocus,txtvendbrws1_lostfocus)
+gui.Form1.txtVendBrws1.defaultvalue("")
+gui.Form1.txtVendBrws1.controlgroup(0)
+gui.Form1.lbl4.create(label,"Vendor#:",True,1935,210,1,200,600,True,0,Arial,8,-2147483633,0)
+gui.Form1.lbl4.defaultvalue("")
+gui.Form1.lbl4.controlgroup(0)
+gui.Form1.datepickerBegin.tabstop(True)
+gui.Form1.datepickerBegin.tabindex(1)
+gui.Form1.datepickerEnd.tabstop(True)
+gui.Form1.datepickerEnd.tabindex(2)
+gui.Form1.txtVendBrws1.tabstop(True)
+gui.Form1.txtVendBrws1.tabindex(3)
+gui.Form1.txtVendBrws.tabstop(True)
+gui.Form1.txtVendBrws.tabindex(4)
+gui.Form1.cmdVendBrws.tabstop(True)
+gui.Form1.cmdVendBrws.tabindex(5)
+gui.Form1.cmdPrint.tabstop(True)
+gui.Form1.cmdPrint.tabindex(6)
+
+
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+
+Variable.Global.iBIRunID.Declare(Long,0)
+Variable.Global.iBILogID.Declare(Long,0)
+Variable.Global.sDate.Declare(String)
+Variable.Global.eDate.Declare(String)
+Variable.Global.sVendor.Declare(String)
+Variable.UDT.uReport.Define("VENDOR",String,VENDOR)
+Variable.UDT.uReport.Define("NAME_VENDOR",String,NAME_VENDOR)
+Variable.UDT.uReport.Define("INVOICE",String,INVOICE)
+Variable.UDT.uReport.Define("DATE_INVOICE",String,DATE_INVOICE)
+Variable.UDT.uReport.Define("AMT_INVOICE",Float,AMT_INVOICE)
+Variable.UDT.uReport.Define("BIRUNID",Long)
+Variable.UDT.uReport.Define("PURCHASE_ORDER",String,PURCHASE_ORDER)
+Variable.uGlobal.uRep.Declare("uReport")
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+'coded by: SFF
+'8/19/14
+'Open/Paid Vendor PO Report for Universal Metal
+F.Intrinsic.Control.SetErrorHandler("Main_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+F.ODBC.Connection!conX.OpenConnection(V.Ambient.PDSN,V.Ambient.PUser,V.Ambient.PPass)
+
+Gui.Form1..Show
+Gui.Form1.datepickerBegin.SetFocus
+
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("Main_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_4012_VENDOR_PO.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.Debug.SetLA(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Form1_unload)
+Function.Intrinsic.Control.EndIf
+
+Program.Sub.Main.End
+
+program.sub.form1_unload.start
+F.ODBC.Connection!conX.Close
+F.Intrinsic.Control.End
+
+program.sub.form1_unload.End
+
+program.sub.cmdvendbrws_click.start
+F.Intrinsic.Control.SetErrorHandler("cmdvendbrws_click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+V.Local.sRet.Declare(String)
+F.Intrinsic.UI.SetBrowserHotTypeAhead(True)
+F.Intrinsic.UI.Browser(300,"",V.Local.sRet)
+
+F.Intrinsic.Control.If(V.Local.sRet,<>,"***CANCEL***")
+	F.Intrinsic.String.Split(V.Local.sRet,"*!*",V.Local.sRet)
+	Gui.Form1.txtVendBrws1.Text(V.Local.sRet(0))
+	Gui.Form1.txtVendBrws.Text(V.Local.sRet(1))
+F.Intrinsic.Control.Else
+	F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.EndIf
+
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("cmdvendbrws_click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_4012_VENDOR_PO.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Form1_unload)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.cmdvendbrws_click.End
+
+program.sub.cmdprint_click.start
+F.Intrinsic.Control.SetErrorHandler("cmdprint_click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.sSql.Declare(String)
+V.Local.sRet.Declare(String)
+V.Local.sBDate.Declare(String)
+V.Local.sEDate.Declare(String)
+'F.Intrinsic.Debug.InvokeDebugger
+'
+'F.Intrinsic.Debug.Stop
+
+F.Intrinsic.Control.If(V.Screen.Form1!txtVendBrws.Text,=,"")
+	F.Intrinsic.UI.Msgbox("Select Vendor","Selection Error")
+	F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.EndIf
+
+Gui.Form1..Visible(false)
+F.Global.BI.GetRunID(V.Global.iBIRunID)
+F.Global.BI.startLogging(V.Global.iBIRunID,-1,-1,"",V.Global.iBILogID)
+
+V.Global.sDate.Set(V.Screen.Form1!datepickerBegin.Value)
+V.Global.eDate.Set(V.Screen.Form1!datepickerEnd.Value)
+V.Global.sVendor.Set(V.Screen.Form1!txtVendBrws1.Text)
+
+V.uGlobal.uRep.Redim(-1,-1)
+V.Local.sBDate.Set(V.Screen.Form1!datepickerBegin.Value)
+V.Local.sEDate.Set(V.Screen.Form1!datepickerEnd.Value)
+
+F.Intrinsic.String.Format(V.Local.sBDate,"YYYY-MM-DD",V.Local.sBDate)
+F.Intrinsic.String.Format(V.Local.sEDate,"YYYY-MM-DD",V.Local.sEDate)
+
+'SELECT OPEN INVOICES
+F.Intrinsic.String.Concat("select a.vendor as vendor,b.name_vendor as name_vendor,a.invoice as invoice,a.purchase_order as purchase_order,a.date_invoice as date_invoice,a.amt_invoice as amt_invoice from v_ap_open_items as a left join v_vendor_master as b on a.vendor = b.vendor where batch_code = '10' and a.date_invoice between '",V.Local.sBDate,"' and '",V.Local.sEDate,"' and a.vendor = '",V.Global.sVendor,"'",V.Local.sSql)
+F.ODBC.Connection!conX.OpenRecordsetRO("rst",V.local.sSql)
+F.Intrinsic.Control.If(V.ODBC.conX!rst.EOF,<>,True)
+	F.Intrinsic.Variable.LoadUDTFromRecordset("conX","rst","v.uGlobal.uRep",False)
+F.Intrinsic.Control.endif
+F.ODBC.conX!rst.Close
+
+F.Intrinsic.Variable.UDTSetMemberValue(V.uGlobal.uRep!BIRUNID,V.Global.iBIRunID)
+
+
+F.Intrinsic.Variable.SetUDTFieldReference(V.uGlobal.uRep!BIRUNID,"BIRUNID")
+
+
+F.ODBC.Connection!conX.OpenRecordsetRW("rst","select * from GCG_4012_UMP_VND_INV")
+F.Intrinsic.Control.If(V.uGlobal.uRep.UBound,<>,-1)
+	F.Intrinsic.Variable.SaveUDTToRecordset("conX","rst","v.uGlobal.uRep")
+F.Intrinsic.Control.EndIf
+F.ODBC.conX!rst.Close
+
+F.Global.BI.StopLogging(V.Global.iBILogID)
+
+F.Intrinsic.Control.CallSub(Callbi)
+F.Intrinsic.Control.CallSub(Form1_unload)
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("cmdprint_click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_4012_VENDOR_PO.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Form1_unload)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.cmdprint_click.End
+
+program.sub.txtvendbrws1_lostfocus.start
+F.Intrinsic.Control.SetErrorHandler("txtvendbrws1_lostfocus_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.sSql.Declare(String)
+V.Local.sRet.Declare(String)
+
+F.Intrinsic.Control.If(V.Screen.Form1!txtVendBrws1.Text,<>,"")
+	F.Intrinsic.String.Concat("Select vendor,name_vendor from V_vendor_master where vendor = '",V.Screen.Form1!txtVendBrws1.Text,"'",V.Local.sSql)
+	F.ODBC.Connection!conX.OpenRecordsetRO("rst",V.Local.sSql)
+	F.Intrinsic.Control.If(V.ODBC.conX!rst.EOF,<>,True)
+		Gui.Form1.txtVendBrws1.Text(V.ODBC.conX!rst.FieldValLTrim!VENDOR)
+		Gui.Form1.txtVendBrws.Text(V.ODBC.conX!rst.FieldValLTrim!NAME_VENDOR)
+		F.ODBC.conX!rst.Close
+	F.Intrinsic.Control.Else
+		F.Intrinsic.UI.Msgbox("Vendor Not Found: Check Vendor#","Selection Error")
+		Gui.Form1.txtVendBrws1.SetFocus
+		F.ODBC.conX!rst.Close
+		F.Intrinsic.Control.ExitSub
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.Else
+	F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("txtvendbrws1_lostfocus_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_4012_VENDOR_PO.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Form1_unload)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.txtvendbrws1_lostfocus.End
+
+Program.Sub.CallBI.Start
+F.Intrinsic.Control.SetErrorHandler("CallBI_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.iRet.Declare(Long)
+V.Local.sParams.Declare(String)
+V.Local.sParamValues.Declare(String)
+
+V.Local.sParams.Set("sDate*!*eDate*!*Vendor*!*RUNID")
+F.Intrinsic.String.Concat(V.Global.sDate,"*!*",V.Global.eDate,"*!*",V.Global.sVendor,"*!*",V.Global.iBIRunID,V.Local.sParamValues)
+F.Global.BI.RunReportPreProcessor(V.Global.iBIRunID,V.Global.iBILogID,V.Local.sParams,V.Local.sParamValues,"",-1,True,"",-1,"",-1,"","",V.Local.iRet)
+
+
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("CallBI_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_4012_VENDOR_PO.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Form1_unload)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.CallBI.End
+
+Program.Sub.Comments.Start
+${$0$}$GCG_VENDOR_PO$}$SFF$}$8/19/2014$}$False
+Program.Sub.Comments.End
+
